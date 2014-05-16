@@ -7,12 +7,12 @@ use yii\db\ActiveRecord;
 use yii\db\Expression;
 
 /**
- * This is the model class for table "app_actionlog".
+ * This is the model class for table "actionlog".
  *
- * @property string $id
- * @property string $user_id
+ * @property int $id
+ * @property int $user_id
  * @property string $user_remote
- * @property string $time
+ * @property timestamp $time
  * @property string $action
  * @property string $category
  * @property string $message

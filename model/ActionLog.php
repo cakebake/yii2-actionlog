@@ -40,6 +40,14 @@ class ActionLog extends ActiveRecord
                 ],
                 'value' => new Expression('NOW()'),
             ],
+            'timestamp' => [
+                'class' => 'yii\behaviors\BlameableBehavior',
+                'attributes' => [
+                    ActiveRecord::EVENT_BEFORE_INSERT => 'user_id',
+                    ActiveRecord::EVENT_BEFORE_UPDATE => 'user_id',
+                    ActiveRecord::EVENT_BEFORE_DELETE => 'user_id',
+                ],
+            ],
         ];
     }
 
@@ -49,11 +57,6 @@ class ActionLog extends ActiveRecord
     public function rules()
     {
         return [
-            [['user_id'], 'integer'],
-            [['user_remote', 'time', 'action', 'category', 'message'], 'required'],
-            [['time'], 'safe'],
-            [['message'], 'string'],
-            [['user_remote', 'action', 'category'], 'string', 'max' => 255]
         ];
     }
 

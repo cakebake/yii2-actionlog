@@ -3,6 +3,8 @@
 namespace cakebake\actionlog\model;
 
 use Yii;
+use yii\db\ActiveRecord;
+use yii\db\Expression;
 
 /**
  * This is the model class for table "app_actionlog".
@@ -15,7 +17,7 @@ use Yii;
  * @property string $category
  * @property string $message
  */
-class ActionLog extends \yii\db\ActiveRecord
+class ActionLog extends ActiveRecord
 {
     /**
      * @inheritdoc
@@ -23,6 +25,22 @@ class ActionLog extends \yii\db\ActiveRecord
     public static function tableName()
     {
         return '{{%actionlog}}';
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function behaviors()
+    {
+        return [
+            'timestamp' => [
+                'class' => 'yii\behaviors\TimestampBehavior',
+                'attributes' => [
+                    ActiveRecord::EVENT_BEFORE_INSERT => 'time',
+                ],
+                'value' => new Expression('NOW()'),
+            ],
+        ];
     }
 
     /**
@@ -46,7 +64,7 @@ class ActionLog extends \yii\db\ActiveRecord
     {
         return [
             'id' => Yii::t('actionlog', 'ID'),
-            'user_id' => Yii::t('actionlog', 'User ID'),
+            'user_id' => Yii::t('actionlog', 'User'),
             'user_remote' => Yii::t('actionlog', 'User Remote'),
             'time' => Yii::t('actionlog', 'Time'),
             'action' => Yii::t('actionlog', 'Action'),

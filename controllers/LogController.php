@@ -6,6 +6,7 @@ use Yii;
 use cakebake\actionlog\model\ActionLog;
 use cakebake\actionlog\model\ActionLogSearch;
 use yii\web\Controller;
+use yii\web\NotFoundHttpException;
 use yii\filters\AccessControl;
 
 /**
@@ -54,5 +55,21 @@ class LogController extends Controller
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
+    }
+
+    /**
+     * Finds the ActionLog model based on its primary key value.
+     * If the model is not found, a 404 HTTP exception will be thrown.
+     * @param string $id
+     * @return ActionLog the loaded model
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    protected function findModel($id)
+    {
+        if (($model = ActionLog::findOne($id)) !== null) {
+            return $model;
+        } else {
+            throw new NotFoundHttpException('The requested page does not exist.');
+        }
     }
 }

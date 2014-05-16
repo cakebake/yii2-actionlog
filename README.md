@@ -17,7 +17,7 @@ or add
 
 to the require section of your `composer.json` file.
 
-Post-Installation
+Database Migration
 ------------
 
 Check your database settings and run migration from your console:
@@ -25,6 +25,9 @@ Check your database settings and run migration from your console:
     php yii migrate --migrationPath=@vendor/cakebake/yii2-actionlog/migrations
 
 For more informations see [Database Migration Documentation](http://www.yiiframework.com/doc-2.0/guide-console-migrate.html#applying-migrations)
+
+Configuration
+------------
 
 To access the module, you need to add this to your application configuration:
 

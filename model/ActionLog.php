@@ -40,14 +40,6 @@ class ActionLog extends ActiveRecord
                 ],
                 'value' => new Expression('NOW()'),
             ],
-            'timestamp' => [
-                'class' => 'yii\behaviors\BlameableBehavior',
-                'attributes' => [
-                    ActiveRecord::EVENT_AFTER_INSERT => 'user_id',
-                    ActiveRecord::EVENT_AFTER_UPDATE => 'user_id',
-                    ActiveRecord::EVENT_AFTER_DELETE => 'user_id',
-                ],
-            ],
         ];
     }
 

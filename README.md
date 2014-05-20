@@ -1,6 +1,7 @@
 Yii2 Action Log
 ===============
-Logs user actions like create, read, update, delete and custom
+Automatically logs user actions like create, update, delete.
+In addition, you can manually apply the method ```ActionLog::add('Save sample message')```, where you will need.
 
 Installation
 ------------
@@ -46,3 +47,26 @@ Add the new menu item to your navbar:
     ......
 
 You may have to customize the user rights for the access log view. You could do it by editing ```controllers/LogController.php```.
+
+Example manual usage
+------------
+
+This is an example in the login method from the module cakebake/yii2-accounts.
+
+    use cakebake\actionlog\model\ActionLog;
+
+    ......
+    public function login()
+    {
+        $user = $this->getUser();
+        if ($this->validate()) {
+            ActionLog::add('success', $user->id); //log message for success
+
+            return Yii::$app->user->login($user, $this->rememberMe ? 3600 * 24 * 30 : 0);
+        } else {
+            ActionLog::add('error', $user->id); //log message for error
+
+            return false;
+        }
+    }
+    ......

@@ -20,7 +20,6 @@ $this->params['breadcrumbs'][] = $this->title;
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
             'id',
             'user_id',
             'user_remote',
@@ -28,7 +27,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'action',
             'category',
             'message:ntext',
-            ['class' => 'yii\grid\ActionColumn'],
+            ['class' => 'yii\grid\ActionColumn', 'template' => '{view}'],
         ],
     ]); ?>
 

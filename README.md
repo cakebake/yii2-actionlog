@@ -38,3 +38,11 @@ To access the module, you need to add this to your application configuration:
         ],
     ],
     ......
+
+Add the new menu item to your navbar:
+
+    ......
+    ['label' => 'Log', 'url' => ['/actionlog/log/index']],
+    ......
+
+You may have to customize the user rights for the access log view. You could do it by editing ```controllers/LogController.php```.

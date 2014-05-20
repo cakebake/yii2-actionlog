@@ -46,15 +46,6 @@ class ActionLog extends ActiveRecord
     /**
      * @inheritdoc
      */
-    public function rules()
-    {
-        return [
-        ];
-    }
-
-    /**
-     * @inheritdoc
-     */
     public function attributeLabels()
     {
         return [

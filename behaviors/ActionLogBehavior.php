@@ -38,39 +38,27 @@ class ActionLogBehavior extends Behavior
             ActiveRecord::EVENT_BEFORE_INSERT => 'beforeInsert',
             ActiveRecord::EVENT_BEFORE_UPDATE => 'beforeUpdate',
             ActiveRecord::EVENT_BEFORE_DELETE => 'beforeDelete',
+//            ActiveRecord::EVENT_AFTER_FIND => 'afterFind',
         ];
     }
 
     public function beforeInsert($event)
     {
-        $model = new ActionLog();
-        $model->user_id = $this->owner->getPrimaryKey();
-        $model->action = Yii::$app->requestedAction->id;
-        $model->user_remote = $_SERVER['REMOTE_ADDR'];
-        $model->category = Yii::$app->requestedAction->controller->id;
-        $model->message = $this->message !== null ? $this->message : __METHOD__;
-        $model->save();
+        ActionLog::add($this->message !== null ? $this->message : __METHOD__, $this->owner->getPrimaryKey());
     }
 
     public function beforeUpdate($event)
     {
-        $model = new ActionLog();
-        $model->user_id = $this->owner->getPrimaryKey();
-        $model->action = Yii::$app->requestedAction->id;
-        $model->user_remote = $_SERVER['REMOTE_ADDR'];
-        $model->category = Yii::$app->requestedAction->controller->id;
-        $model->message = $this->message !== null ? $this->message : __METHOD__;
-        $model->save();
+        ActionLog::add($this->message !== null ? $this->message : __METHOD__, $this->owner->getPrimaryKey());
     }
 
     public function beforeDelete($event)
     {
-        $model = new ActionLog();
-        $model->user_id = $this->owner->getPrimaryKey();
-        $model->action = Yii::$app->requestedAction->id;
-        $model->user_remote = $_SERVER['REMOTE_ADDR'];
-        $model->category = Yii::$app->requestedAction->controller->id;
-        $model->message = $this->message !== null ? $this->message : __METHOD__;
-        $model->save();
+        ActionLog::add($this->message !== null ? $this->message : __METHOD__, $this->owner->getPrimaryKey());
     }
+
+//    public function afterFind($event)
+//    {
+//        ActionLog::add($this->message !== null ? $this->message : __METHOD__, $this->owner->getPrimaryKey());
+//    }
 }

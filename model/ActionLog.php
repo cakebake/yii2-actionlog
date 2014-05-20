@@ -44,6 +44,28 @@ class ActionLog extends ActiveRecord
     }
 
     /**
+    * Adds a message to ActionLog model
+    *
+    * @param mixed $message The log message
+    */
+    public static function add($message, $userID = null)
+    {
+        if ($userID === null) {
+            $user = Yii::$app->getUser();
+            $userID = ($user && !$user->isGuest) ? $user->id : 0;
+        }
+
+        $model = new ActionLog();
+        $model->user_id = $userID;
+        $model->user_remote = $_SERVER['REMOTE_ADDR'];
+        $model->action = Yii::$app->requestedAction->id;
+        $model->category = Yii::$app->requestedAction->controller->id;
+        $model->message = serialize($message);
+
+        return $model->save();
+    }
+
+    /**
      * @inheritdoc
      */
     public function attributeLabels()

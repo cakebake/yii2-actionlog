@@ -32,6 +32,7 @@ class ActionLogSearch extends ActionLog
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'sort' => ['defaultOrder' => ['time' => SORT_DESC]],
         ]);
 
         if (!($this->load($params) && $this->validate())) {
@@ -41,10 +42,10 @@ class ActionLogSearch extends ActionLog
         $query->andFilterWhere([
             'id' => $this->id,
             'user_id' => $this->user_id,
-            'time' => $this->time,
         ]);
 
-        $query->andFilterWhere(['like', 'user_remote', $this->user_remote])
+        $query->andFilterWhere(['like', 'time', $this->time])
+            ->andFilterWhere(['like', 'user_remote', $this->user_remote])
             ->andFilterWhere(['like', 'action', $this->action])
             ->andFilterWhere(['like', 'category', $this->category])
             ->andFilterWhere(['like', 'message', $this->message]);

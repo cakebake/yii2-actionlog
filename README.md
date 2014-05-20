@@ -10,11 +10,11 @@ The preferred way to install this extension is through [composer](http://getcomp
 
 Either run
 
-    php composer.phar require --prefer-dist cakebake/yii2-actionlog "dev-master"
+    php composer.phar require --prefer-dist cakebake/yii2-actionlog "*"
 
 or add
 
-    "cakebake/yii2-actionlog": "dev-master"
+    "cakebake/yii2-actionlog": "*"
 
 to the require section of your `composer.json` file.
 

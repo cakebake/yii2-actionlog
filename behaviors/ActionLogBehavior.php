@@ -11,12 +11,12 @@ use cakebake\actionlog\model\ActionLog;
  * To use ActionLogBehavior, simply insert the following code to your ActiveRecord class:
  *
  * ```php
- * use cakebake\actionlog\behaviors\ActionLogBehavior;
- *
  * public function behaviors()
  * {
  *     return [
- *         ActionLogBehavior::className(),
+ *          'actionlog' => [
+ *              'class' => 'cakebake\actionlog\behaviors\ActionLogBehavior',
+ *          ],
  *     ];
  * }
  * ```
@@ -41,7 +41,29 @@ class ActionLogBehavior extends Behavior
         ];
     }
 
-    public function afterFind($event)
+    public function beforeInsert($event)
+    {
+        $model = new ActionLog();
+        $model->user_id = $this->owner->getPrimaryKey();
+        $model->action = Yii::$app->requestedAction->id;
+        $model->user_remote = $_SERVER['REMOTE_ADDR'];
+        $model->category = Yii::$app->requestedAction->controller->id;
+        $model->message = $this->message !== null ? $this->message : __METHOD__;
+        $model->save();
+    }
+
+    public function beforeUpdate($event)
+    {
+        $model = new ActionLog();
+        $model->user_id = $this->owner->getPrimaryKey();
+        $model->action = Yii::$app->requestedAction->id;
+        $model->user_remote = $_SERVER['REMOTE_ADDR'];
+        $model->category = Yii::$app->requestedAction->controller->id;
+        $model->message = $this->message !== null ? $this->message : __METHOD__;
+        $model->save();
+    }
+
+    public function beforeDelete($event)
     {
         $model = new ActionLog();
         $model->user_id = $this->owner->getPrimaryKey();

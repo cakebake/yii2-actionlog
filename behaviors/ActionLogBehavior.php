@@ -38,7 +38,6 @@ class ActionLogBehavior extends Behavior
             ActiveRecord::EVENT_BEFORE_INSERT => 'beforeInsert',
             ActiveRecord::EVENT_BEFORE_UPDATE => 'beforeUpdate',
             ActiveRecord::EVENT_BEFORE_DELETE => 'beforeDelete',
-            ActiveRecord::EVENT_AFTER_FIND => 'afterFind',
         ];
     }
 

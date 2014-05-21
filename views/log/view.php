@@ -27,19 +27,25 @@ $this->params['breadcrumbs'][] = $this->title;
             'user_id',
             'user_remote',
             'status',
+            [
+                'attribute' => 'message',
+                'visible' => ($model->message === null) ? true : false,
+            ],
         ],
     ]) ?>
 
-    <div class="panel panel-info">
-        <div class="panel-heading">
-            <h3 class="panel-title"><?= Yii::t('actionlog', 'Message') ?></h3>
+    <?php if ($model->message !== null) : ?>
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <h3 class="panel-title"><?= Yii::t('actionlog', 'Message') ?></h3>
+            </div>
+            <div class="panel-body">
+                <?php VarDumper::dump(@unserialize($model->message), 10, true) ?>
+            </div>
+            <ul class="list-group">
+                <li class="list-group-item text-muted"><?= Html::encode($model->message) ?></li>
+            </ul>
         </div>
-        <div class="panel-body">
-            <?php VarDumper::dump(@unserialize($model->message), 10, true) ?>
-        </div>
-        <ul class="list-group">
-            <li class="list-group-item text-muted"><?= Html::encode($model->message) ?></li>
-        </ul>
-    </div>
+    <?php endif; ?>
 
 </div>

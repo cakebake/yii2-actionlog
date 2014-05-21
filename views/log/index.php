@@ -21,11 +21,10 @@ $this->params['breadcrumbs'][] = $this->title;
         'filterModel' => $searchModel,
         'columns' => [
             'id',
-            'user_id',
-            'user_remote',
             'time',
-            'action',
             'category',
+            'action',
+            'user_id',
             'message:ntext',
             ['class' => 'yii\grid\ActionColumn', 'template' => '{view}'],
         ],

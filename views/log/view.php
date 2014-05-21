@@ -26,6 +26,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'action',
             'user_id',
             'user_remote',
+            'status',
         ],
     ]) ?>
 

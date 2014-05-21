@@ -16,7 +16,7 @@ class ActionLogSearch extends ActionLog
     {
         return [
             [['id', 'user_id'], 'integer'],
-            [['user_remote', 'time', 'action', 'category', 'message'], 'safe'],
+            [['user_remote', 'time', 'action', 'category', 'status', 'message'], 'safe'],
         ];
     }
 
@@ -48,6 +48,7 @@ class ActionLogSearch extends ActionLog
             ->andFilterWhere(['like', 'user_remote', $this->user_remote])
             ->andFilterWhere(['like', 'action', $this->action])
             ->andFilterWhere(['like', 'category', $this->category])
+            ->andFilterWhere(['like', 'message', $this->status])
             ->andFilterWhere(['like', 'message', $this->message]);
 
         return $dataProvider;

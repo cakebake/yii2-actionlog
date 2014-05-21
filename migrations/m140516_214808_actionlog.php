@@ -24,7 +24,8 @@ class m140516_214808_actionlog extends \yii\db\Migration
             'time' => Schema::TYPE_TIMESTAMP . ' NOT NULL',
             'action' => Schema::TYPE_STRING . ' NOT NULL',
             'category' => Schema::TYPE_STRING . ' NOT NULL',
-            'message' => Schema::TYPE_TEXT . ' NOT NULL',
+            'status' => Schema::TYPE_STRING . ' NULL',
+            'message' => Schema::TYPE_TEXT . ' NULL',
         ], $tableOptions);
     }
 

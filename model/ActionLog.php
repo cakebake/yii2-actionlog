@@ -15,10 +15,16 @@ use yii\db\Expression;
  * @property timestamp $time
  * @property string $action
  * @property string $category
+ * @property string $status
  * @property string $message
  */
 class ActionLog extends ActiveRecord
 {
+    const LOG_STATUS_SUCCESS = 'success';
+    const LOG_STATUS_INFO = 'info';
+    const LOG_STATUS_WARNING = 'warning';
+    const LOG_STATUS_ERROR = 'error';
+
     /**
      * @inheritdoc
      */
@@ -46,9 +52,10 @@ class ActionLog extends ActiveRecord
     /**
     * Adds a message to ActionLog model
     *
+    * @param string $status The log status information
     * @param mixed $message The log message
     */
-    public static function add($message, $userID = null)
+    public static function add($status = null, $message = null, $userID = null)
     {
         if ($userID === null) {
             $user = Yii::$app->getUser();
@@ -60,7 +67,8 @@ class ActionLog extends ActiveRecord
         $model->user_remote = $_SERVER['REMOTE_ADDR'];
         $model->action = Yii::$app->requestedAction->id;
         $model->category = Yii::$app->requestedAction->controller->id;
-        $model->message = serialize($message);
+        $model->status = $status;
+        $model->message = ($message !== null) ? serialize($message) : null;
 
         return $model->save();
     }
@@ -77,6 +85,7 @@ class ActionLog extends ActiveRecord
             'time' => Yii::t('actionlog', 'Time'),
             'action' => Yii::t('actionlog', 'Action'),
             'category' => Yii::t('actionlog', 'Category'),
+            'status' => Yii::t('actionlog', 'Status'),
             'message' => Yii::t('actionlog', 'Message'),
         ];
     }

@@ -25,6 +25,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'category',
             'action',
             'user_id',
+            'status:ntext',
             'message:ntext',
             ['class' => 'yii\grid\ActionColumn', 'template' => '{view}'],
         ],

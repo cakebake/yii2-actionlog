@@ -57,13 +57,8 @@ class ActionLog extends ActiveRecord
     */
     public static function add($status = null, $message = null, $userID = null)
     {
-        if ($userID === null) {
-            $user = Yii::$app->getUser();
-            $userID = ($user && !$user->isGuest) ? $user->id : 0;
-        }
-
         $model = new ActionLog();
-        $model->user_id = $userID;
+        $model->user_id = ($userID !== null) ? $userID : self::getUserID();
         $model->user_remote = $_SERVER['REMOTE_ADDR'];
         $model->action = Yii::$app->requestedAction->id;
         $model->category = Yii::$app->requestedAction->controller->id;
@@ -71,6 +66,18 @@ class ActionLog extends ActiveRecord
         $model->message = ($message !== null) ? serialize($message) : null;
 
         return $model->save();
+    }
+
+    /**
+    * Get the current user ID
+    *
+    * @return int The user ID
+    */
+    public static function getUserID()
+    {
+        $user = Yii::$app->getUser();
+
+        return $user && !$user->getIsGuest() ? $user->getId() : 0;
     }
 
     /**

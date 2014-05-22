@@ -38,7 +38,7 @@ class ActionLogBehavior extends Behavior
             ActiveRecord::EVENT_BEFORE_INSERT => 'beforeInsert',
             ActiveRecord::EVENT_BEFORE_UPDATE => 'beforeUpdate',
             ActiveRecord::EVENT_BEFORE_DELETE => 'beforeDelete',
-//            ActiveRecord::EVENT_AFTER_FIND => 'afterFind',
+            ActiveRecord::EVENT_AFTER_FIND => 'afterFind',
         ];
     }
 
@@ -57,8 +57,8 @@ class ActionLogBehavior extends Behavior
         ActionLog::add(ActionLog::LOG_STATUS_INFO, $this->message !== null ? $this->message : __METHOD__);
     }
 
-//    public function afterFind($event)
-//    {
-//        ActionLog::add(null, $this->message !== null ? $this->message : __METHOD__);
-//    }
+    public function afterFind($event)
+    {
+        ActionLog::add(ActionLog::LOG_STATUS_INFO, $this->message !== null ? $this->message : __METHOD__);
+    }
 }

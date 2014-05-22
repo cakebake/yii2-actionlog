@@ -44,21 +44,21 @@ class ActionLogBehavior extends Behavior
 
     public function beforeInsert($event)
     {
-        ActionLog::add(null, $this->message !== null ? $this->message : __METHOD__, $this->owner->getPrimaryKey());
+        ActionLog::add(ActionLog::LOG_STATUS_INFO, $this->message !== null ? $this->message : __METHOD__);
     }
 
     public function beforeUpdate($event)
     {
-        ActionLog::add(null, $this->message !== null ? $this->message : __METHOD__, $this->owner->getPrimaryKey());
+        ActionLog::add(ActionLog::LOG_STATUS_INFO, $this->message !== null ? $this->message : __METHOD__);
     }
 
     public function beforeDelete($event)
     {
-        ActionLog::add(null, $this->message !== null ? $this->message : __METHOD__, $this->owner->getPrimaryKey());
+        ActionLog::add(ActionLog::LOG_STATUS_INFO, $this->message !== null ? $this->message : __METHOD__);
     }
 
 //    public function afterFind($event)
 //    {
-//        ActionLog::add(null, $this->message !== null ? $this->message : __METHOD__, $this->owner->getPrimaryKey());
+//        ActionLog::add(null, $this->message !== null ? $this->message : __METHOD__);
 //    }
 }

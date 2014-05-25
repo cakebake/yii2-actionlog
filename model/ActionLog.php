@@ -54,11 +54,12 @@ class ActionLog extends ActiveRecord
     *
     * @param string $status The log status information
     * @param mixed $message The log message
+    * @param int $uID The user id
     */
-    public static function add($status = null, $message = null, $userID = null)
+    public static function add($status = null, $message = null, $uID = 0)
     {
         $model = Yii::createObject(__CLASS__);
-        $model->user_id = ($userID !== null) ? $userID : $model->getUserID();
+        $model->user_id = ($uID !== 0) ? $uID : $model->getUserID();
         $model->user_remote = $_SERVER['REMOTE_ADDR'];
         $model->action = Yii::$app->requestedAction->id;
         $model->category = Yii::$app->requestedAction->controller->id;
@@ -71,17 +72,13 @@ class ActionLog extends ActiveRecord
     /**
     * Get the current user ID
     *
-    * @todo did not found any solution to get the user data of the current user until now
-    *
     * @return int The user ID
     */
     public static function getUserID()
     {
-        return 0;
+        $user = Yii::$app->getUser();
 
-//        $user = Yii::$app->getUser();
-//
-//        return $user && !$user->getIsGuest() ? $user->getId() : 0;
+        return $user && !$user->getIsGuest() ? $user->getId() : 0;
     }
 
     /**

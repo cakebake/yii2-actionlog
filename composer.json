@@ -3,7 +3,7 @@
     "description": "Logs user actions like create, read, update, delete and custom",
     "type": "yii2-extension",
     "keywords": ["yii2","extension","log","activeRecord","actionlog"],
-    "license": "GPL-3.0",
+    "license": "LGPL-V3",
     "authors": [
         {
             "name": "cakebake (Jens A.)",

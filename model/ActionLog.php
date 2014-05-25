@@ -57,7 +57,7 @@ class ActionLog extends ActiveRecord
     */
     public static function add($status = null, $message = null, $userID = null)
     {
-        $model = new ActionLog();
+        $model = Yii::createObject(__CLASS__);
         $model->user_id = ($userID !== null) ? $userID : $model->getUserID();
         $model->user_remote = $_SERVER['REMOTE_ADDR'];
         $model->action = Yii::$app->requestedAction->id;
@@ -71,13 +71,17 @@ class ActionLog extends ActiveRecord
     /**
     * Get the current user ID
     *
+    * @todo did not found any solution to get the user data of the current user until now
+    *
     * @return int The user ID
     */
     public static function getUserID()
     {
-        $user = Yii::$app->getUser();
+        return 0;
 
-        return $user && !$user->getIsGuest() ? $user->getId() : 0;
+//        $user = Yii::$app->getUser();
+//
+//        return $user && !$user->getIsGuest() ? $user->getId() : 0;
     }
 
     /**

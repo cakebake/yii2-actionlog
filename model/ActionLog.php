@@ -59,7 +59,7 @@ class ActionLog extends ActiveRecord
     public static function add($status = null, $message = null, $uID = 0)
     {
         $model = Yii::createObject(__CLASS__);
-        $model->user_id = ($uID !== 0) ? $uID : $model->getUserID();
+        $model->user_id = ((int)$uID !== 0) ? (int)$uID : (int)$model->getUserID();
         $model->user_remote = $_SERVER['REMOTE_ADDR'];
         $model->action = Yii::$app->requestedAction->id;
         $model->category = Yii::$app->requestedAction->controller->id;

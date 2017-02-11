@@ -40,6 +40,23 @@ To access the module, you need to add this to your application configuration:
     ],
     ......
 
+Add the behavior actionlog to the models which should logged. While doing this, you can define which actions should be logged. Without defining these properties, all actions (create, update, delete) except the index action will be logged:
+
+    ......
+    public function behaviors()
+    {
+        return [
+            'actionlog' => [
+                'class' => 'cakebake\actionlog\behaviors\ActionLogBehavior',
+                'logCreate' => true,
+                'logUpdate' => true,
+                'logDelete' => true,
+                'logIndex' => false,
+            ],
+        ];
+    }
+    ......
+    
 Add the new menu item to your navbar:
 
     ......

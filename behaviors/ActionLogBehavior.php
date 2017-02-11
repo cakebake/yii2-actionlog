@@ -2,7 +2,6 @@
 
 namespace cakebake\actionlog\behaviors;
 
-use cakebake\actionlog\Module;
 use Yii;
 use yii\db\ActiveRecord;
 use yii\base\Behavior;

@@ -60,7 +60,7 @@ class ActionLog extends ActiveRecord
     {
         $model = Yii::createObject(__CLASS__);
         $model->user_id = ((int)$uID !== 0) ? (int)$uID : (int)$model->getUserID();
-        $model->user_remote = $_SERVER['REMOTE_ADDR'];
+        $model->user_remote = !empty($_SERVER['REMOTE_ADDR'])?$_SERVER['REMOTE_ADDR']:'127.0.0.1';
         $model->action = Yii::$app->requestedAction->id;
         $model->category = Yii::$app->requestedAction->controller->id;
         $model->status = $status;
@@ -76,7 +76,11 @@ class ActionLog extends ActiveRecord
     */
     public static function getUserID()
     {
-        $user = Yii::$app->getUser();
+        $yii=Yii::$app;
+        if(!method_exists($yii,'getUser')){
+            return -1;
+        }
+        $user = $yii->getUser();
 
         return $user && !$user->getIsGuest() ? $user->getId() : 0;
     }
